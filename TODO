@@ -1,0 +1,13 @@
+# Missing
+
+- CLI to make some sense.
+- OPAM-ing
+- Proper logging
+
+# Features
+
+- cache
+- parallelization?
+- CSS inline?
+- generalize to allow other blogs?
+- JSON feed lol?
