@@ -1,6 +1,8 @@
-# Battletoad
+# Fleaswallow
 
-Static site generator using OCaml.
+![](/fleaswallow.png)
+
+A static site generator using OCaml.
 
 ## What else?
 
@@ -21,6 +23,9 @@ off the ground in OCaml.
 
 ## Things I'd want different
 
+These were inspiration features for the project, I might update this README to
+include which I have and haven't implemented later.
+
 The assumption on using Bootstrap is a bit hard on me. Generating more/less
 links is done in Racket and not in the templates.
 
@@ -38,19 +43,8 @@ Linkable paragraphs.
 
 Versioned posts.
 
-## Commands
-
 ### TODO
 
-- `ocamllint`
-- `opam` friendliness
-- use, like, clean modules.
-- tests
-
-### Modules used
-
-- Omd
-- ISO8601
-- Jingoo
+See `TODO`.
 
    [1]: https://github.com/greghendershott/frog
