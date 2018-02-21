@@ -1,4 +1,4 @@
-OUTPUT=battletoad
+OUTPUT=fleaswallow
 
 build:
 	ocamlbuild \
