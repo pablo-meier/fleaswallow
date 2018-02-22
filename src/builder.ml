@@ -41,13 +41,6 @@ let all_feeds_path = "/feeds/all.atom.xml"
 let rss_path_for tag = Filename.concat "feeds" (tag ^ ".rss.xml")
 let atom_path_for tag = Filename.concat "feeds" (tag ^ ".atom.xml")
 
-let format_date_index {tm_mon; tm_mday; tm_year; _} =
-  Printf.sprintf "%d-%02d-%02d" (tm_year + 1900) (tm_mon + 1) tm_mday
-
-
-let current_time_as_iso () =
-  Unix.gettimeofday () |> ISO8601.Permissive.string_of_datetime
-
 
 let all_posts model =
   Map.find_exn (Model.posts_by_tag model) "all"
@@ -79,13 +72,10 @@ let or_string x ~default = match x with
 
 (** I don't fully understand what a URN is or why they look like this, just aiming
  * for compatibility with Hendershott's Frog here. *)
-let bad_in_urns = Re2.create_exn "[^a-z]+"
 let generate_urn url_components =
-  let rewrite_bads x = Re2.rewrite_exn bad_in_urns ~template:"-" x in
-  List.map ~f:rewrite_bads url_components
+  List.map ~f:Utils.dasherized url_components
   |> List.cons "urn"
   |> String.concat ~sep:":"
-
 
 
 let index_post_model model post =
@@ -94,7 +84,7 @@ let index_post_model model post =
   let url = Post.fs_path post in
   let full_url = Post.fs_path post |> (post_uri model) in
   let id = generate_urn [Model.hostname model; url] in
-  let datestring = Post.datetime post |> format_date_index in
+  let datestring = Post.datetime post |> Utils.format_date_index in
   let publish_date_iso = Post.datetime post |> Unix.mktime |> Utils.fst |> ISO8601.Permissive.string_of_datetime in
   let description = Post.og_description post |> (or_string ~default:(Utils.get_desc content_md)) in
   let content = content_md |> Omd.to_html in
@@ -127,7 +117,7 @@ let index_model model tag posts =
    ("full_uri",             Jg_types.Tstr full_uri);
    ("full_atom_uri",        Jg_types.Tstr full_atom_uri);
    ("id",                   Jg_types.Tstr id);
-   ("build_date",           Jg_types.Tstr (current_time_as_iso ()));
+   ("build_date",           Jg_types.Tstr (Utils.current_time_as_iso ()));
    ("og_image",             Jg_types.Tstr og_image);
    ("posts",                Jg_types.Tlist (List.map ~f:(index_post_model model) posts));
   ]

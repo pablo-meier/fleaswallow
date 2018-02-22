@@ -1,4 +1,7 @@
 open Core
+open Unix
+
+open Re2.Std
 
 (** Writable list from a string list *)
 let from_string_list input =
@@ -41,3 +44,20 @@ let rec get_desc lst = match lst with
   | x::xs -> match x with
     | Omd.Paragraph x -> words_in x
     | _ -> get_desc xs
+
+
+(** Prints a date-formatted as dashed pseudo-ISO8601 *)
+let format_date_index {tm_mon; tm_mday; tm_year; _} =
+  Printf.sprintf "%d-%02d-%02d" (tm_year + 1900) (tm_mon + 1) tm_mday
+
+
+(** Prints the current time as an ISO date *)
+let current_time_as_iso () =
+  Unix.gettimeofday () |> ISO8601.Permissive.string_of_datetime
+
+
+let to_dasherize = Re2.create_exn "[^a-zA-Z0-9]+"
+(** Sub out anything that isn't a number, letter, or dash. Lowercase all. Dashes where spaces lived. *)
+let dasherized name =
+  Re2.rewrite_exn to_dasherize ~template:"-" name
+  |> String.lowercase

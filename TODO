@@ -1,8 +1,12 @@
 # Missing
 
 - CLI to make some sense.
-- OPAM-ing
+- ocamldoc
+- ocamllint
+- Tests
+
 - Proper logging
+- OPAM-ing
 
 # Features
 
