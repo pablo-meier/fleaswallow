@@ -1,7 +1,7 @@
 # Missing
 
-- ocamldoc
 - ocamllint
+- ocamldoc
 - Tests
 
 - Proper logging
