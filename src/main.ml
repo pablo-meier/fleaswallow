@@ -3,6 +3,62 @@ open Core
 open Unix
 
 
+let print_banner () =
+  let () = Printf.printf {| ,gggggggggggggg
+dP""""""88"""""" ,dPYb,                                                             ,dPYb, ,dPYb,
+Yb,_    88       IP'`Yb                                                             IP'`Yb IP'`Yb
+ `""    88       I8  8I                                                             I8  8I I8  8I
+     ggg88gggg   I8  8'                                                             I8  8' I8  8'
+        88   8   I8 dP   ,ggg,     ,gggg,gg    ,g,     gg    gg    gg     ,gggg,gg  I8 dP  I8 dP    ,ggggg,    gg    gg    gg
+        88       I8dP   i8" "8i   dP"  "Y8I   ,8'8,    I8    I8    88bg  dP"  "Y8I  I8dP   I8dP    dP"  "Y8ggg I8    I8    88bg
+  gg,   88       I8P    I8, ,8I  i8'    ,8I  ,8'  Yb   I8    I8    8I   i8'    ,8I  I8P    I8P    i8'    ,8I   I8    I8    8I
+   "Yb,,8P      ,d8b,_  `YbadP' ,d8,   ,d8b,,8'_   8) ,d8,  ,d8,  ,8I  ,d8,   ,d8b,,d8b,_ ,d8b,_ ,d8,   ,d8'  ,d8,  ,d8,  ,8I
+     "Y8P'      8P'"Y88888P"Y888P"Y8888P"`Y8P' "YY8P8PP""Y88P""Y88P"   P"Y8888P"`Y88P'"Y888P'"Y88P"Y8888P"    P""Y88P""Y88P"
+
+                                                  NKkddolloxxxkOKWW
+                                               WKkdlccccccccccccldk0XW
+                                             WKxlcclllllllllllllllccco0W
+                                           WXxlcllllllllllllllllllllc:ckN
+                                          NOocllllllllllllllllllllllllc:xX
+                                        NOoclllllllllllllllllllllllllllc:oK
+ W0dlcc:cccclodxkO00KXNWMMMMMMMMMMMMWWN0occlllllllllllllllllllllllllllllc:l0W
+ Nd'............'',,;cldxOO0KXXXKKK0KK0xddxxdoooollllllllllllllllllllllllc:cOW
+ Wx'....................',,;clllccclodddxxO00OO00OkkOkxdddooddoolllllllllllccON
+  Kl..........................'',;:::::::ccclloodddxkOOkO0OOO00OkkkxkkkxxxddxxOKXNW
+  W0c..............................',;:cclccccccc:::cccclllooodddddxkOOkkOkO00OOkk0NW
+   W0c..................................',:cllllllllllcccccccc:::::ccccccccllllooollxkkO0KXNNWWW
+    WKl'.....................'',,,,,,,''....';:ccllllllllllllllllllllllllccccccccccccc::ccllooooddddxxxxxkkkkkkkkO000KXN
+     WNk:.................',;:clllllllc:;,'....'',:ccllllllllllllllllllllllllllllllllllllllllllccccc::::::::::::;::;,',;
+       WKd,..............;:loxkkOkkkkxxxdoc:,'......',;:cclllllllllllllllllllllllllllllllllllllllllllllllllllcc:;,''..'c
+         W0l,...........;ldkO000000000000Oxol;'..........',;;::cclllllllllllllllllllllllllllllllllllllcc::;,''.......:kN
+           N0o;'.......:odkOO00000000OOOOOOkxo:''''............'',,;::ccccllllllllllllllllcccc::;;;,,''............;xX
+             WKxl;''..,oxxO0OO0kolc:;;d0KXXKkxl;,,''''''..............'',,,,,,,,,,,,,,,,,'''....................'cxKW
+                NKkdl;:oxkKNXXXO; cKNNNKkxo:;;;;,,,'''''''''''''';;:::::::::;;;;;;;;;;,..................':d0N
+                    Nx:lxk0XNNNXx;...:OXNNX0kxl:;;;;;;;;;;,,,,,,,,,;clodxddolccccclllllcccc;..............,cx0N
+                    Wk;cdxkKXNNNNX0OKXNNNNKkxdc;;;;;;;;;;;;;;;;;;;;cdxkKXXXKo......cxkkkkxdo;.........,cokKN
+                   WXo,;ldxk0KXNNNNNNNNNX0kxdc;;;;;;;;;;;;;;;;;;;;;cdxOXNNNK: cKXNNXOxd:'.',:codOKNW
+                 N0xc;;::codxkO0KKKKKK0Okxdl:;;;;;;;;;;;;;;;;;;;;;;cdxOKNNNXk,. .:OXNNNKOxo:,oKXNW
+               WKxlcllcc::::loddxxkkkxddoc:;;;;;;;;;:::;;;;;;;;;;;;:oxxOXNNNXKkddOXXNNNKOxdl;:O
+              Xkdddxddddoolc::::cccccc::;;;;;;;;;;:looll::;:::::;;;;:oxxO0XXNNNNNNNNNX0kxdl:;:O
+             Xkdxxxxxxxdxxxddollc:;;;;;;;;;;;;;;;:odc,:docclolllc:;;;:lodxkO0KKXKKK00Oxdoc::;,lKW
+             Xxdxxxxxxdc;codxxxxdoolcc::;;;;;;;:codd;.;ddddl:,,ooc;;;;;:cloddxxkkxxxdolc:;;::;;ckN
+             Nkodxxxxxdo:,'';clddxxxxddoollllloodxxdocoxxxxl;,;odo::;;;;;;::ccccccccccccccllooollxKW
+              Xkoddxxxxxxdoc;''',:coddxxxxxxxxxxxxxxxxxxxxxddodxxxdolcccccccccccllloooddddxxxxxxdddKW
+               Nkccodddxxxxxxdoc;,''',;:clodxxxxxxxxxxxxxxxxxxxxxxxxxddddddddddxxxxxxxxddoolclddxxdkN
+                Xl'';cloddxxxxxxxxdoc:;,'''',;:clloddddxxxxxxxxxxxxxxxxxxxxxdddoolcc:;,,'',,;coxxxdON
+                 Kc..'',;clodddxxxxxxxxddolc:;,,,''''',,,;;;::::::::::;;;;,,,,,''',,,;;:cloddxxxddxKW
+                  Kc.'''.',,;::cloodddxdxxxxxxxddoollc:::;;;;;;,,,,,,,;;;::ccllooodddxxxxxxxddddxOXW
+                   Xl''..'''''''',,;:cclooddddxxxxxxxxxxxxxxxxxxxxxddxxxxxxxxxxxxxxxxddddoollokKNW
+                    Nx;'co;'''..'''.''',,,,;::ccllooooddddddddddddddddddddddddoooollcc:;;,,,c0W
+                     WK0NWKxc;co:'..'',,''..'''''',,,,;;;:::::::::::::::::;;;;;,,,''''...,:dX
+                            WXNWKolxo,'';ol,','''''',,,,,,,,,,,'',,',,,,,,,,'',,,''..',,l0NW
+                                 WWMN0xx0WNO:',d0o,.'''''',,,,,'',,,,,,,,,,''',,';l::xKXN
+                                           WKdkNMNx'.......''';:,'''''','''';;,:xKWNNW
+                                                 Wk,.'','''coxKN0olk0x::oolxXXKXW
+|} in
+  Printf.printf "\n%!"
+
+
 let create_new_post name =
   let title = name in
   let datestring = Utils.current_time_as_iso () in
@@ -28,6 +84,8 @@ Be brilliant!
 
 
 let build_site () =
+  let () = print_banner () in
+  let () = Logs.info (fun m -> m "Building site…") in
   let src_path = "./" in
   let model = Model.build_blog_model src_path in
   let build_dir = (Model.build_dir model) in
@@ -38,8 +96,9 @@ let build_site () =
   Files.copy_static_dir src_path build_dir
 
 
-
-let toplevel new_post_title should_build () =
+let toplevel new_post_title should_build should_debug () =
+  let () = Logs.set_level @@ if should_debug then (Some Logs.Debug) else (Some Logs.Info) in
+  let () = Logs.set_reporter (Logs.format_reporter ()) in
   match should_build with
   | true -> build_site ()
   | false -> match new_post_title with
@@ -50,8 +109,9 @@ let toplevel new_post_title should_build () =
 let spec =
     let open Command.Spec in
     empty
-    +> flag "-n" (optional string) ~doc:"title - Generate a new file for a blog post with parameterized title."
+    +> flag "-n" (optional string) ~doc:" title - Generate a new file for a blog post with parameterized title."
     +> flag "-b" no_arg ~doc:" Build the site."
+    +> flag "-d" no_arg ~doc:" Enable debug logs."
 
 
 let command =
@@ -63,8 +123,7 @@ Fleaswallow is a static site generator, optimized for blogs. If you run it in a
 directory with the correct files, it will write HTML files you can push up to
 S3 or GitHub Pages.
 
-Below are the files it expects. To see a sample site layout, run with
-"-new-site <name>" to have sample in `<name>`
+Below are the files it expects.
 
   * config.ini — An inifile with the toplevel metadata about your blog, and
     some configuration.

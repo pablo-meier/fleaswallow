@@ -10,6 +10,7 @@ build:
 		-pkg jingoo \
 		-pkg fileutils \
 		-pkg inifiles \
+		-pkg logs \
 		-tag "ppx(ppx-jane -as-ppx)" \
 		-tag thread \
 		-tag debug \
@@ -31,6 +32,7 @@ prod:
 		-pkg jingoo \
 		-pkg fileutils \
 		-pkg inifiles \
+		-pkg logs \
 		-tag "ppx(ppx-jane -as-ppx)" \
 		-tag thread \
 		-tag debug \

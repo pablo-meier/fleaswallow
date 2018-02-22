@@ -125,7 +125,7 @@ let index_model model tag posts =
 
 (** Generates the blog's index and tag pages *)
 let generate_index_pages blog_model =
-  let () = Printf.printf "Building index pages...\n" in
+  let () = Logs.info (fun m -> m "Building index pages…") in
   let template_path = template_path blog_model "index-template.tmpl" in
   let index_page tag posts =
     let models = index_model blog_model tag posts in
@@ -139,7 +139,7 @@ let generate_index_pages blog_model =
 (** Generates the blog's individual post pages
  * *)
 let generate_post_pages model =
-  let () = Printf.printf "Building post pages...\n" in
+  let () = Logs.info (fun m -> m "Building post pages…") in
   let today_now = Unix.time () |> Unix.gmtime in
   let is_old x = (today_now.tm_year - x.tm_year) > 1 in
   let tag_url tag = Jg_types.Tobj [
@@ -197,7 +197,7 @@ let generate_post_pages model =
 
 (** Generates the blog's toplevel homepage *)
 let generate_homepage model =
-  let () = Printf.printf "Building homepage...\n" in
+  let () = Logs.info (fun m -> m "Building homepage…") in
   let homepage_model posts =
     [("title",                Jg_types.Tstr (Model.title model));
      ("author",               Jg_types.Tstr (Model.author model));
@@ -223,7 +223,7 @@ let generate_homepage model =
 
 (** Generates the blog's static pages *)
 let generate_statics model =
-  let () = Printf.printf "Building statics...\n" in
+  let () = Logs.info (fun m -> m "Building static pages…") in
   let statics_model page =
     let title = Page.title page in
     let description = Page.description page in
@@ -255,7 +255,7 @@ let generate_statics model =
  * later one for every tag.
  * *)
 let generate_rss_feeds model =
-  let () = Printf.printf "Building RSS feeds...\n" in
+  let () = Logs.info (fun m -> m "Building feeds…") in
   let rss_template_path = template_path model "rss.xml.tmpl" in
   let atom_template_path = template_path model "atom.xml.tmpl" in
   let make_rss_from models =
@@ -279,7 +279,7 @@ let generate_rss_feeds model =
 
 (** Generates the sitemap. *)
 let generate_sitemap model pairs =
-  let () = Printf.printf "Building sitemap...\n" in
+  let () = Logs.info (fun m -> m "Building sitemap…") in
   let hostname = Model.hostname model in
   let contents =
     pairs
