@@ -57,7 +57,9 @@ let current_time_as_iso () =
 
 
 let to_dasherize = Re2.create_exn "[^a-zA-Z0-9]+"
+let trailing_dash = Re2.create_exn "-$"
 (** Sub out anything that isn't a number, letter, or dash. Lowercase all. Dashes where spaces lived. *)
 let dasherized name =
   Re2.rewrite_exn to_dasherize ~template:"-" name
+  |> Re2.rewrite_exn trailing_dash ~template:""
   |> String.lowercase
