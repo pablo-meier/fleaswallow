@@ -54,10 +54,15 @@ let template_path model file =
   List.fold_left ~init:input_fs_path ~f:Filename.concat ["templates"; file]
 
 
-let tag_path tag =
-  match tag with
+let tag_path = function
   | "all" -> "/archives.html"
-  | _ -> String.concat ["/tags/"; tag; ".html"]
+  | tag -> String.concat ["/tags/"; tag; ".html"]
+
+
+let tag_url tag =
+  Jg_types.Tobj [
+    ("name", Jg_types.Tstr tag);
+    ("url",  Jg_types.Tstr (tag_path tag))]
 
 
 let post_uri model fs_path =
@@ -142,10 +147,6 @@ let generate_post_pages model =
   let () = Logs.info (fun m -> m "Building post pages…") in
   let today_now = Unix.time () |> Unix.gmtime in
   let is_old x = (today_now.tm_year - x.tm_year) > 1 in
-  let tag_url tag = Jg_types.Tobj [
-      ("name", Jg_types.Tstr tag);
-      ("url",  Jg_types.Tstr (tag_path tag))] in
-
   let prev_next_url = function
     | None -> Jg_types.Tnull
     | Some (title, path) -> Jg_types.Tobj [
@@ -199,11 +200,13 @@ let generate_post_pages model =
 let generate_homepage model =
   let () = Logs.info (fun m -> m "Building homepage…") in
   let homepage_model posts =
+    let tags = model |> Model.posts_by_tag |>  Map.to_alist |> List.map ~f:(Fn.compose tag_url Utils.fst) in
     [("title",                Jg_types.Tstr (Model.title model));
      ("author",               Jg_types.Tstr (Model.author model));
      ("description_abridged", Jg_types.Tstr (Model.description model));
      ("og_description",       Jg_types.Tstr (Model.description model));
      ("rss_feed_uri",         Jg_types.Tstr all_feeds_path);
+     ("tags",                 Jg_types.Tlist tags);
      ("full_uri",             Jg_types.Tstr (Model.hostname model));
      ("og_image",             Jg_types.Tstr "https://morepablo.com/pabloface.png");
      ("posts",                Jg_types.Tlist (List.map ~f:(index_post_model model) posts));
