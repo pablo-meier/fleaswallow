@@ -63,17 +63,18 @@ let create_new_post name =
   let title = name in
   let datestring = Utils.current_time_as_iso () in
   let empty_body =
-{|   Title: |} ^ title ^ {|
-   Date: |} ^ datestring ^ {|
-   Tags: DRAFT
-   og_image:
-   og_description: 
+{|    Title: |} ^ title ^ {|
+    Date: |} ^ datestring ^ {|
+    Tags: DRAFT
+    og_image:
+    og_description:
 
-_The song for this post is [][], by ._
+<small><em>The song for this post is <a href=""></a>, by .</em></small>
 
 Be brilliant!
 
 <!-- more -->
+
 |} in
   let filepath =
     (Unix.gettimeofday ()

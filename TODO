@@ -1,16 +1,26 @@
-# Missing
+# Broken
 
-- ocamllint
-- ocamldoc
-- Tests
+- Tag link list for homepage
+- Don't allow duplicate names for posts (i.e. check availability before overwriting)
 
-- Proper logging
+# Small fruit
+
+- Template post as a param
 - OPAM-ing
+- GitHub releases
 
-# Features
+# Wishlist
 
 - cache
 - parallelization?
 - CSS inline?
 - generalize to allow other blogs?
 - JSON feed lol?
+
+# Eh, maybe
+
+- Tests?
+- Descriptive logging?
+- ocamldoc?
+
+- ocamllint
