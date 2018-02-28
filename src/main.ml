@@ -59,6 +59,27 @@ Yb,_    88       IP'`Yb                                                         
   Printf.printf "\n%!"
 
 
+(** Some blog posts will have the same title but need different filenames (i.e.
+ * if you have a weekly feature called "This Week" or somesuch, you'll need
+ * this-week.md, this-week-2.md...
+ *
+ * While it hits the filesystem a _n_ times, I don't worry too much
+ * for performance here.
+ * *)
+let conflict_free_filename directory basename =
+  let rec iter suffix =
+    let base_and_suffix = Printf.sprintf "%s-%d.md" basename suffix in
+    let full_path = Filename.concat directory base_and_suffix in
+    match Files.check_exists full_path with
+    | true -> iter (suffix + 1)
+    | false -> full_path
+  in
+  let full_path = (Filename.concat directory basename) ^ ".md" in
+  match Files.check_exists full_path with
+  | true -> iter 2
+  | false -> full_path
+
+
 let create_new_post name =
   let title = name in
   let datestring = Utils.current_time_as_iso () in
@@ -76,12 +97,15 @@ Be brilliant!
 <!-- more -->
 
 |} in
-  let filepath =
+  let posts_directory = "posts" in
+  let basename = String.concat ~sep:"-" [
     (Unix.gettimeofday ()
      |> Unix.gmtime
-     |> Utils.format_date_index) ^ "-" ^ (Utils.dasherized name) ^ ".md" in
-  let () = Files.write_out_to_file "posts/" (filepath, empty_body) in
-  Printf.printf "New post named \"%s\" at %s\n" name ("posts/" ^ filepath)
+     |> Utils.format_date_index);
+    (Utils.dasherized name)]  in
+  let filepath = conflict_free_filename posts_directory basename in
+  let () = Files.write_out_to_file "./" (filepath, empty_body) in
+  Printf.printf "New post named \"%s\" at %s\n" name filepath
 
 
 let build_site () =

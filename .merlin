@@ -1,4 +1,4 @@
 S src
 B _build
 B _build/src
-PKG core re2 omd jingoo ISO8601 inifiles logs
+PKG core re2 omd jingoo ISO8601 inifiles logs fileutils

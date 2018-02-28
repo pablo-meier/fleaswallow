@@ -17,11 +17,24 @@ let to_record x =
 
 let name {name;_} = name
 let lines {lines;_} = lines
+let contents {lines;_} = Utils.add_newlines lines
+
+
+let file_contents path =
+  try
+    Some (to_record path)
+  with Sys_error x -> None
+
+
+let check_exists path = match Sys.file_exists ~follow_symlinks:true path with
+  | `No -> false
+  | _ -> true
 
 
 let whitelist = [".md$"; ".html$"]
 let whitelist_regexes = List.map ~f:(Re2.create_exn ~options:[]) whitelist
 let in_whitelist x = List.exists whitelist_regexes ~f:(fun y -> Re2.matches y x)
+
 
 (** Retrieves files from a directory and their contents as lines *)
 let file_contents_in_dir dirname =
