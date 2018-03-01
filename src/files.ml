@@ -28,7 +28,7 @@ let file_contents path =
 
 let check_exists path = match Sys.file_exists ~follow_symlinks:true path with
   | `No -> false
-  | _ -> true
+  | `Yes | `Unknown -> true
 
 
 let whitelist = [".md$"; ".html$"]

@@ -1,12 +1,13 @@
-# Small fruit
+# Meta
 
 - Dune/JBuilder
-- Template "new post" as a param
-- Templates for various pages as strings in model (iterative shell, reduce filesystem in builder)
-- Sample blog (starter)
 - OPAM-ing (redundant with Dune?)
 - GitHub releases
 - GitHub Pages user docs. Bootstrapped, of course!
+
+# Features
+- Sample blog (starter)
+- Template "new post" as a model param
 
 # Wishlist
 

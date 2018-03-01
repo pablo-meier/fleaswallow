@@ -49,11 +49,6 @@ let all_posts model =
 let take num lst = List.take lst num
 
 
-let template_path model file =
-  let input_fs_path = Model.input_fs_path model in
-  List.fold_left ~init:input_fs_path ~f:Filename.concat ["templates"; file]
-
-
 let tag_path = function
   | "all" -> "/archives.html"
   | tag -> String.concat ["/tags/"; tag; ".html"]
@@ -129,14 +124,14 @@ let index_model model tag posts =
 
 
 (** Generates the blog's index and tag pages *)
-let generate_index_pages blog_model =
+let generate_index_pages model =
   let () = Logs.info (fun m -> m "Building index pages…") in
-  let template_path = template_path blog_model "index-template.tmpl" in
+  let template_string = Model.index_template model in
   let index_page tag posts =
-    let models = index_model blog_model tag posts in
-    Jg_template.from_file ~models:models template_path
+    let models = index_model model tag posts in
+    Jg_template.from_string ~models:models template_string
   in
-  Model.posts_by_tag blog_model
+  Model.posts_by_tag model
   |> Map.to_alist
   |> List.map ~f:(fun (tag, posts) -> (tag_path tag, index_page tag posts))
 
@@ -187,10 +182,10 @@ let generate_post_pages model =
      ("link_to_older",        prev_next_url next);
     ]
   in
-  let template_path = template_path model "post-template.tmpl" in
+  let template_string = Model.post_template model in
   let post_page p =
     let models = make_model p in
-    Jg_template.from_file ~models:models template_path
+    Jg_template.from_string ~models:models template_string
   in
   all_posts model
   |> List.map ~f:(fun x -> (Post.fs_path x, post_page x))
@@ -212,10 +207,10 @@ let generate_homepage model =
      ("posts",                Jg_types.Tlist (List.map ~f:(index_post_model model) posts));
     ]
   in
-  let template_path = template_path model "homepage.tmpl" in
+  let template_string = Model.homepage_template model in
   let render_homepage posts =
     let models = homepage_model posts in
-    let contents = Jg_template.from_file ~models:models template_path in
+    let contents = Jg_template.from_string ~models:models template_string in
     [("index.html", contents)]
   in
   model
@@ -242,12 +237,12 @@ let generate_statics model =
      ("content",              Jg_types.Tstr contents);
     ]
   in
-  let template_path = template_path model "statics-template.tmpl" in
+  let template_string = Model.statics_template model in
   let render_static page =
     let models = statics_model page in
     let base_name =  match (Page.fs_path page |> Filename.basename |> Filename.split_extension) with
       | (filename, _) -> filename ^ ".html" in
-    let contents = Jg_template.from_file ~models:models template_path in
+    let contents = Jg_template.from_string ~models:models template_string in
     (base_name, contents)
   in
   Model.static_pages model
@@ -259,13 +254,13 @@ let generate_statics model =
  * *)
 let generate_rss_feeds model =
   let () = Logs.info (fun m -> m "Building feeds…") in
-  let rss_template_path = template_path model "rss.xml.tmpl" in
-  let atom_template_path = template_path model "atom.xml.tmpl" in
+  let rss_template_string = Model.rss_template model in
+  let atom_template_string = Model.atom_template model in
   let make_rss_from models =
-    Jg_template.from_file ~models:models rss_template_path
+    Jg_template.from_string ~models:models rss_template_string
   in
   let make_atom_from models =
-    Jg_template.from_file ~models:models atom_template_path
+    Jg_template.from_string ~models:models atom_template_string
   in
   let make_feeds_for (tag, posts) =
     let rss_filename = rss_path_for tag in
