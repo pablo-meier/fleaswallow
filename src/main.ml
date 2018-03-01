@@ -81,22 +81,16 @@ let conflict_free_filename directory basename =
 
 
 let create_new_post name =
-  let title = name in
-  let datestring = Utils.current_time_as_iso () in
-  let empty_body =
-{|    Title: |} ^ title ^ {|
-    Date: |} ^ datestring ^ {|
-    Tags: DRAFT
-    og_image:
-    og_description:
-
-<small><em>The song for this post is <a href=""></a>, by .</em></small>
-
-Be brilliant!
-
-<!-- more -->
-
-|} in
+  let models = [
+    ("title", Jg_types.Tstr name);
+    ("datestring", Jg_types.Tstr (Utils.current_time_as_iso ()))
+  ] in
+  let body = Filename.concat "templates" "new-post.tmpl"
+    |> Files.file_contents
+    |> Option.value_exn
+    |> Files.contents
+    |> Jg_template.from_string ~models:models
+  in
   let posts_directory = "posts" in
   let basename = String.concat ~sep:"-" [
     (Unix.gettimeofday ()
@@ -104,7 +98,7 @@ Be brilliant!
      |> Utils.format_date_index);
     (Utils.dasherized name)]  in
   let filepath = conflict_free_filename posts_directory basename in
-  let () = Files.write_out_to_file "./" (filepath, empty_body) in
+  let () = Files.write_out_to_file "./" (filepath, body) in
   Printf.printf "New post named \"%s\" at %s\n" name filepath
 
 
