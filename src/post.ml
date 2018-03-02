@@ -205,7 +205,9 @@ let form_prev_next_links posts =
     in
     (count + 1, updated_post::accum)
   in
-  List.fold_left ~f:foldable ~init:(0, []) posts
+  match (List.length posts) > 1 with
+  | false -> posts
+  | true -> List.fold_left ~f:foldable ~init:(0, []) posts
     |> Utils.snd
     |> List.rev
 
