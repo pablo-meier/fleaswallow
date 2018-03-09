@@ -18,9 +18,9 @@ build:
 		-tag short_paths \
 		-cflags "-w A-4-33-40-41-42-43-34-44" \
 		-cflags -strict-sequence \
-		src/main.byte
-	rm -f ./main.byte
-	mv _build/src/main.byte $(OUTPUT)
+		src/$(OUTPUT).byte
+	rm -f ./$(OUTPUT).byte
+	mv _build/src/fleaswallow.byte $(OUTPUT)
 
 prod:
 	ocamlbuild \
@@ -40,9 +40,9 @@ prod:
 		-tag short_paths \
 		-cflags "-w A-4-33-40-41-42-43-34-44" \
 		-cflags -strict-sequence \
-		src/main.native
-	rm -f ./main.native
-	mv _build/src/main.native $(OUTPUT)
+		src/$(OUTPUT).native
+	rm -f ./$(OUTPUT).native
+	mv _build/src/fleaswallow.native $(OUTPUT)
 
 
 clean:
