@@ -1,0 +1,5 @@
+(executable
+ (name fleaswallow)
+ (libraries fleaswallow_lib)
+ (preprocess
+  (pps ppx_let ppx_jane)))

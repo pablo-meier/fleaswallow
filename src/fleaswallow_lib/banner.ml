@@ -1,9 +1,10 @@
 (** Putting this in its own file, since it's otherwise messing with the syntax
- * highlighting of whatever file I put it in :-p *)
-
+    * highlighting of whatever file I put it in :-p *)
 
 let print_banner () =
-  let () = Printf.printf {| ,gggggggggggggg
+  let () =
+    Printf.printf
+      {| ,gggggggggggggg
 dP""""""88"""""" ,dPYb,                                                             ,dPYb, ,dPYb,
 Yb,_    88       IP'`Yb                                                             IP'`Yb IP'`Yb
  `""    88       I8  8I                                                             I8  8I I8  8I
@@ -54,5 +55,6 @@ Yb,_    88       IP'`Yb                                                         
                                  WWMN0xx0WNO:',d0o,.'''''',,,,,'',,,,,,,,,,''',,';l::xKXN
                                            WKdkNMNx'.......''';:,'''''','''';;,:xKWNNW
                                                  Wk,.'','''coxKN0olk0x::oolxXXKXW
-|} in
+|}
+  in
   Printf.printf "\n%!"

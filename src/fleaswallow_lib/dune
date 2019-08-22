@@ -1,0 +1,5 @@
+(library
+ (name fleaswallow_lib)
+ (inline_tests)
+ (libraries core re2 cmarker jingoo fileutils inifiles ISO8601 logs)
+ (preprocess (pps ppx_let ppx_jane ppx_inline_test)))

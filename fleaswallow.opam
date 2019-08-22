@@ -1,0 +1,24 @@
+opam-version: "2.0"
+name: "fleaswallow"
+version: "0.2.0"
+maintainer: "Pablo Meier <pablo.a.meier@gmail.com>"
+authors: "Pablo Meier <pablo.a.meier@gmail.com>"
+homepage: "https://github.com/pablo-meier/fleaswallow"
+synopsis: "Static site generator, optimized for blogs"
+bug-reports: "https://github.com/pablo-meier/fleaswallow/issues"
+license: "GPL"
+dev-repo: "git+https://github.com/pablo-meier/fleaswallow"
+build: [ "dune" "build" "-p" name]
+depends: [
+  "core" {= "v0.12.3"}
+  "ctypes" {= "0.15.1"}
+  "ctypes-foreign" {= "0.4.0"}
+  "fileutils" {= "0.5.3"}
+  "jingoo" {= "1.2.21"}
+  "ISO8601" {= "0.2.5"}
+  "logs" {= "0.6.3"}
+  "ocaml-inifiles" {= "1.2"}
+  "ocamlformat" {= "0.11.0"}
+  "re2" {= "v0.12.0"}
+  "utop" {= "2.4.0"}
+]
