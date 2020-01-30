@@ -1,5 +1,5 @@
 profile = conventional
 break-cases = fit
 margin = 80
-parse-docstrings = true
+parse-docstrings = false
 wrap-comments = true

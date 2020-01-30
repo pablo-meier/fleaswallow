@@ -11,6 +11,7 @@ dev-repo: "git+https://github.com/pablo-meier/fleaswallow"
 build: [ "dune" "build" "-p" name]
 depends: [
   "core" {= "v0.12.3"}
+  "cmarker" {= "0.3.0"}
   "ctypes" {= "0.15.1"}
   "ctypes-foreign" {= "0.4.0"}
   "fileutils" {= "0.5.3"}

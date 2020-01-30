@@ -1,7 +1,11 @@
 open Core
 open Unix
 
-(** TODOs: * * hardcode magic numbers * * Caching * Parallelization. *)
+(** TODOs:
+  * - Hardcode magic numbers (namely, the default og_image)
+  * - Caching
+  * - Parallelization.
+  *)
 
 let format_date { tm_wday; tm_mon; tm_mday; tm_year; _ } =
   let day_of_week =
@@ -56,7 +60,7 @@ let post_uri model fs_path =
 let or_string x ~default = match x with Some y -> y | None -> default
 
 (** I don't fully understand what a URN is or why they look like this, just
-    aiming * for compatibility with Hendershott's Frog here. *)
+    aiming for compatibility with Hendershott's Frog here. *)
 let generate_urn url_components =
   List.map ~f:Utils.dasherized url_components
   |> List.cons "urn" |> String.concat ~sep:":"
