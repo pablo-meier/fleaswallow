@@ -1,0 +1,3 @@
+(library
+ (name cmarker)
+ (libraries ctypes ctypes.foreign))

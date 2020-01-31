@@ -11,7 +11,6 @@ dev-repo: "git+https://github.com/pablo-meier/fleaswallow"
 build: [ "dune" "build" "-p" name]
 depends: [
   "core" {= "v0.12.3"}
-  "cmarker" {= "0.3.0"}
   "ctypes" {= "0.15.1"}
   "ctypes-foreign" {= "0.4.0"}
   "fileutils" {= "0.5.3"}
@@ -21,5 +20,4 @@ depends: [
   "ocaml-inifiles" {= "1.2"}
   "ocamlformat" {= "0.11.0"}
   "re2" {= "v0.12.0"}
-  "utop" {= "2.4.0"}
 ]
