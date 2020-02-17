@@ -1,5 +1,28 @@
-profile = conventional
-break-cases = fit
-margin = 80
+break-cases = all
+margin = 100
 parse-docstrings = false
-wrap-comments = true
+wrap-comments = false
+assignment-operator = end-line
+break-fun-decl = fit-or-vertical
+break-infix = fit-or-vertical
+break-infix-before-func
+break-separators = after
+break-sequences
+dock-collection-brackets
+exp-grouping = preserve
+field-space = tight-decl
+if-then-else = fit-or-vertical
+indicate-nested-or-patterns = unsafe-no
+let-and = sparse
+let-binding-spacing = sparse
+ocp-indent-compat
+parens-tuple = multi-line-only
+parens-tuple-patterns = multi-line-only
+sequence-style = terminator
+sequence-blank-line = preserve-one
+single-case = sparse
+space-around-lists = false
+space-around-records
+space-around-variants
+type-decl = sparse
+wrap-fun-args = false

@@ -5,7 +5,9 @@ val title : t -> string
 
 val description : t -> string
 
-val fs_path : t -> string
+val input_fs_path : t -> string
+
+val output_fs_path : t -> string
 
 val contents : t -> string
 

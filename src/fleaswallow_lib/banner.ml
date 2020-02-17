@@ -1,5 +1,5 @@
-(** Putting this in its own file, since it's otherwise messing with the syntax
-    * highlighting of whatever file I put it in :-p *)
+(** Putting this in its own file, since it's otherwise messing with the syntax * highlighting of
+    whatever file I put it in :-p *)
 
 let print_banner () =
   let () =

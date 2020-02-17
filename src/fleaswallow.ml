@@ -2,9 +2,7 @@ open Core
 open Command.Let_syntax
 
 let toplevel new_post_title should_build should_debug () =
-  let () =
-    Logs.set_level @@ if should_debug then Some Logs.Debug else Some Logs.Info
-  in
+  let () = Logs.set_level @@ if should_debug then Some Logs.Debug else Some Logs.Info in
   let () = Logs.set_reporter (Logs.format_reporter ()) in
   match should_build with
   | true -> Fleaswallow_lib.build_site ()
@@ -12,6 +10,7 @@ let toplevel new_post_title should_build should_debug () =
       match new_post_title with
       | Some x -> Fleaswallow_lib.create_new_post x
       | None -> Fleaswallow_lib.build_site () )
+
 
 let command =
   Command.basic
@@ -43,12 +42,13 @@ Below are the files it expects.
 |})
     [%map_open
       let title =
-        flag "n" (optional string)
-          ~doc:
-            "  title - Generate a new file for a blog post with parameterized \
-             title."
+        flag
+          "n"
+          (optional string)
+          ~doc:"  title - Generate a new file for a blog post with parameterized title."
       and should_build = flag "b" no_arg ~doc:"  build - Build the site"
       and should_debug = flag "d" no_arg ~doc:"  debug - Enable debug logs" in
       toplevel title should_build should_debug]
+
 
 let () = Command.run ~version:"1.0" ~build_info:"P4BLO" command

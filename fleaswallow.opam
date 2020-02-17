@@ -1,13 +1,13 @@
 opam-version: "2.0"
 name: "fleaswallow"
-version: "0.2.0"
-maintainer: "Pablo Meier <pablo.a.meier@gmail.com>"
-authors: "Pablo Meier <pablo.a.meier@gmail.com>"
-homepage: "https://github.com/pablo-meier/fleaswallow"
-synopsis: "Static site generator, optimized for blogs"
-bug-reports: "https://github.com/pablo-meier/fleaswallow/issues"
+version: "0.2.1"
+maintainer: "Pablo Meier <pablo@morepablo.com>"
+authors: "Pablo Meier <pablo@morepablo.com>"
+homepage: "https://git.sr.ht/~srpablo/fleaswallow"
+synopsis: "Static site generator, optimized for blogs, namely mine."
+bug-reports: "https://todo.sr.ht/~srpablo/Fleaswallow"
 license: "GPL"
-dev-repo: "git+https://github.com/pablo-meier/fleaswallow"
+dev-repo: "git+https://git.sr.ht/~srpablo/fleaswallow"
 build: [ "dune" "build" "-p" name]
 depends: [
   "core" {= "v0.12.3"}
@@ -18,6 +18,6 @@ depends: [
   "ISO8601" {= "0.2.5"}
   "logs" {= "0.6.3"}
   "ocaml-inifiles" {= "1.2"}
-  "ocamlformat" {= "0.11.0"}
+  "ocamlformat" {= "0.13.0"}
   "re2" {= "v0.12.0"}
 ]

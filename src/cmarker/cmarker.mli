@@ -6,16 +6,24 @@ val html_of_commonmark : string -> string
 
 (* Complex interface *)
 
-type render_flag = [ `SourcePos | `HardBreaks | `Safe | `Unsafe ]
+type render_flag =
+  [ `SourcePos
+  | `HardBreaks
+  | `Safe
+  | `Unsafe
+  ]
 
-type parse_flag = [ `Normalize | `ValidateUTF8 | `Smart ]
+type parse_flag =
+  [ `Normalize
+  | `ValidateUTF8
+  | `Smart
+  ]
 
 (* Parsing *)
 
 val of_string : ?flags:parse_flag list -> string -> t
 
-val of_file :
-  ?flags:parse_flag list -> string -> [ `Ok of t | `Error of string ]
+val of_file : ?flags:parse_flag list -> string -> [ `Ok of t | `Error of string ]
 
 (* Rendering *)
 
